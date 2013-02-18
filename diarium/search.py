@@ -11,7 +11,6 @@ import page
 import config
 
 
-#TODO: Suche nach mehreren Tags in verschiedenen Kombinationen
 def nameFromFilename(fileName):
     fileNameSplit = os.path.splitext(fileName)
     if(fileNameSplit[1] == config.fileExtension):
