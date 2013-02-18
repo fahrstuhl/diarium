@@ -40,7 +40,8 @@ class Page:
             subprocess.call((command[0], self.filename))
 
     def createFilename(self):
-        filename = os.path.join(config.journalPath, str(self.name) + str(config.fileExtension))
+        filename = os.path.join(config.journalPath, str(self.name)
+                                + str(config.fileExtension))
         return filename
 
     def getLines(self):
