@@ -1,0 +1,24 @@
+'''
+Created on Jan 27, 2013
+
+@author: fahrstuhl
+'''
+import unittest
+import write
+
+
+class Test(unittest.TestCase):
+
+    def testPrepareEntry(self):
+        self.assertEquals("\n{} public, private  \n".format(write.time),
+                          write.prepareEntry("public, private"))
+        self.assertEqual("\n{}   \n".format(write.time), write.prepareEntry(""))
+
+    def testPrepareContent(self):
+        self.assertEquals("", write.prepareContent(None))
+        self.assertEquals("Test\n", write.prepareContent("Test"))
+
+
+if __name__ == "__main__":
+    #import sys;sys.argv = ['', 'Test.testName']
+    unittest.main()
