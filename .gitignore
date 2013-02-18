@@ -33,3 +33,9 @@ nosetests.xml
 .mr.developer.cfg
 .project
 .pydevproject
+
+# Backup Files
+.*.swp
+*.swp
+*~
+*.tmp
