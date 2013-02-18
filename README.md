@@ -16,7 +16,7 @@ A simple journal: A place to dump your brain just one command away.
   Done: Search for one or more tags  
   ToDo: Search only on specific date or page  
   ToDo: Open search result in viewer
-- Cross platform
+- Cross platform  
   Done: Linux  
   Untested: Windows, Mac OS X, other desktop os  
   ToDo: Pandora, Android  
