@@ -6,7 +6,7 @@ A simple journal: A place to dump your brain just one command away.
 ## Goals
 - Quickly accessible  
   Done: Only one command to an editor with the current page and time  
-  ToDo: Convenient setup with pip or something
+  Done: Convenient setup with pip or something
 - Simple and human readable  
   Done: Simple plaintext files written in markdown  
   Done: Easier configuration and sane default values  
@@ -32,16 +32,18 @@ A simple journal: A place to dump your brain just one command away.
   ToDo: Use Python's markdown module to search and export in one go  
 
 ## Setup
-- open config.txt and edit it to your liking
+- install [appdirs](http://pypi.python.org/pypi/appdirs) with pip
+- install diarium with pip
+- run one of the three scripts write.py, read.py or search.py in a console once and open the displayed config.ini in a texteditor
 - set a command for your favorite texteditor  
   make sure it runs in foreground and doesn't fork and detach. Gvim needs the --nofork flag for example. Consult the manual of your favorite texteditor for more information
 - set a command for your favorite textreader or reuse your editor
-- set a path to your journal or use the default and create it manually (ToDo...)
-- (optional) set date- and timeformat  
+- run write.py -h, read.py -h and search.py -h for an overview of the command line settings
+
+- (optional) set a different path to your journal
+- (optional) set a different date- and timeformat  
   see [Python's strftime function](http://docs.python.org/2/library/time.html#time.strftime)
 - (optional) set a file extension like .txt, .journal or leave it blank
-- run write.py -h, read.py -h and search.py -h for an overview of the command line settings
-- set up symlinks in your PATH or aliases in your shell
 
 ## File format
 ``` markdown
