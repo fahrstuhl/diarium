@@ -6,10 +6,10 @@ Created on Jan 27, 2013
 import ConfigParser
 
 
-#TODO: Mit Configparser machen tun.
+#TODO: Switch to ConfigParser
 dateFormat = "%Y-%m-%d"
 timeFormat = "%H:%M:%S"
 fileExtension = ".txt"
-journalPath = "/home/fahrstuhl/journal"
-editor = "/usr/bin/vim"
+journalPath = "/PATH/TO/YOUR/JOURNAL"
+editor = "/PATH/TO/YOUR/EDITOR"
 reader = editor
