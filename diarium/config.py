@@ -4,13 +4,20 @@ Created on Jan 27, 2013
 @author: fahrstuhl
 '''
 import ConfigParser
+import os.path
 
 
 #TODO: Configparser
-dateFormat = "%Y-%m-%d"
+config = ConfigParser.SafeConfigParser()
+if(config.read('config.txt') == []):
+    raise 
+dateFormat = config
 timeFormat = "%H:%M:%S"
 fileExtension = ".txt"
 #TODO: Create path on first run
-journalPath = "/home/fahrstuhl/journal"
+journalPath = os.path.expanduser("~/journal")
 editor = "/usr/bin/gvim --nofork"
 reader = editor
+
+class Error(Exception):
+    
