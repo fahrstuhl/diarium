@@ -9,7 +9,7 @@ A simple journal: A place to dump your brain just one command away.
   ToDo: Convenient setup with pip or something
 - Simple and human readable  
   Done: Simple plaintext files written in markdown  
-  ToDo: Easier configuration  
+  Done: Easier configuration and sane default values  
   ToDo: Documentation
 - Tags and search  
   Done: Entries can be tagged  
