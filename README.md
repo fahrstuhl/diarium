@@ -32,14 +32,14 @@ A simple journal: A place to dump your brain just one command away.
   ToDo: Use Python's markdown module to search and export in one go  
 
 ## Setup
-- open config.py
-- set date- and timeformat  
-  see [Python's strftime function](http://docs.python.org/2/library/time.html#time.strftime)
-- set a file extension like .txt, .journal or leave it blank
-- set a path to your journal and create it manually (ToDo...)
+- open config.txt and edit it to your liking
 - set a command for your favorite texteditor  
   make sure it runs in foreground and doesn't fork and detach. Gvim needs the --nofork flag for example. Consult the manual of your favorite texteditor for more information
 - set a command for your favorite textreader or reuse your editor
+- set a path to your journal or use the default and create it manually (ToDo...)
+- (optional) set date- and timeformat  
+  see [Python's strftime function](http://docs.python.org/2/library/time.html#time.strftime)
+- (optional) set a file extension like .txt, .journal or leave it blank
 - run write.py -h, read.py -h and search.py -h for an overview of the command line settings
 - set up symlinks in your PATH or aliases in your shell
 
