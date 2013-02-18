@@ -33,7 +33,7 @@ A simple journal: A place to dump your brain just one command away.
 
 ## Setup
 - open config.py
-- set date- and timeformat
+- set date- and timeformat  
   see [Python's strftime function](http://docs.python.org/2/library/time.html#time.strftime)
 - set a file extension like .txt, .journal or leave it blank
 - set a path to your journal and create it manually (ToDo...)
