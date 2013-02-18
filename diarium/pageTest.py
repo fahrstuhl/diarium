@@ -24,12 +24,8 @@ class Test(unittest.TestCase):
         self.page.write(testinhalt)
         self.assertEqual(self.page.getLines(), ["# Test\n", testinhalt])
 
-    def testGetMatchingEntries(self):
-        print(self.page.getMatchingEntries(["Test"], True))
-
     def tearDown(self):
         os.remove(self.page.filename)
 
-if __name__ == "__main__":
-    #import sys;sys.argv = ['', 'Test.testName']
-    unittest.main()
+suite = unittest.TestLoader().loadTestsFromTestCase(Test)
+unittest.TextTestRunner().run(suite)

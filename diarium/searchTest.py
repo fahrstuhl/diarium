@@ -15,7 +15,7 @@ import os
 class Test(unittest.TestCase):
 
     def setUp(self):
-        self.numberOfFiles = 1000
+        self.numberOfFiles = 100
         self.tagList = list()
         self.contentList = list()
         for j in range(10):
@@ -56,6 +56,5 @@ class Test(unittest.TestCase):
             name = "test-{}".format(i)
             os.remove(page.Page(name).filename)
 
-if __name__ == "__main__":
-    #import sys;sys.argv = ['', 'Test.testBigSearch']
-    unittest.main()
+suite = unittest.TestLoader().loadTestsFromTestCase(Test)
+unittest.TextTestRunner().run(suite)

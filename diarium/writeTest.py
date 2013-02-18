@@ -18,7 +18,5 @@ class Test(unittest.TestCase):
         self.assertEquals("", write.prepareContent(None))
         self.assertEquals("Test\n", write.prepareContent("Test"))
 
-
-if __name__ == "__main__":
-    #import sys;sys.argv = ['', 'Test.testName']
-    unittest.main()
+suite = unittest.TestLoader().loadTestsFromTestCase(Test)
+unittest.TextTestRunner().run(suite)
