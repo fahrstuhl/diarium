@@ -5,9 +5,9 @@ Created on Jan 27, 2013
 @author: fahrstuhl
 '''
 
-import diarium
-import config
-import page
+from diarium import diarium
+from diarium import config
+from diarium import page
 
 
 global pageName, globalTags, globalContent, globalQuiet

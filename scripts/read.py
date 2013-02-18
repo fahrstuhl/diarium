@@ -6,9 +6,9 @@ Created on Jan 27, 2013
 '''
 
 
-import config
-import page
-import diarium
+from diarium import config
+from diarium import page
+from diarium import diarium
 
 
 pageName = diarium.getDate()

@@ -5,6 +5,7 @@ Created on Jan 27, 2013
 '''
 import ConfigParser
 import os.path
+import appdirs
 
 
 class ConfigFileNotFoundAt(Exception):
@@ -17,14 +18,31 @@ class ConfigFileNotFoundAt(Exception):
         self.path = path
 
     def __str__(self):
-        return "No config file found at " + self.path
+        self.str = "No config file found at \n"
+        for i in self.path:
+            str += i + "\n"
+        return repr(self.str)
 
+config = ConfigParser.ConfigParser()
+configDir = appdirs.user_data_dir("diarium")
+if(not os.path.exists(configDir)):
+    os.mkdir(configDir)
+configFile = os.path.join(configDir, "config.ini")
+if(not os.path.exists(configFile)):
+    config.add_section("journal")
+    config.set("journal", "dateFormat", "%Y-%m-%d")
+    config.set("journal", "timeFormat", "%H:%M:%S")
+    config.set("journal", "journalPath", "~/journal")
+    config.set("journal", "fileExtension", ".txt")
+    config.set("journal", "reader", "/usr/bin/gvim --nofork")
+    config.set("journal", "editor", "/usr/bin/gvim --nofork")
+    with open(configFile, "w") as filePointer:
+        config.write(filePointer)
 configFiles = list()
-codeDirectory = os.path.dirname(__file__)
-configFiles.append(os.path.join(codeDirectory, "config.txt"))
-config = ConfigParser.SafeConfigParser()
+configFiles.append(configFile)
 if(config.read(configFiles) == []):
     raise ConfigFileNotFoundAt(configFiles)
+
 dateFormat = config.get("journal", "dateFormat", "raw")
 timeFormat = config.get("journal", "timeFormat", "raw")
 fileExtension = config.get("journal", "fileExtension")

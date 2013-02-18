@@ -7,8 +7,8 @@ Created on Feb 1, 2013
 import os.path
 
 
-import page
-import config
+from diarium import page
+from diarium import config
 
 
 def nameFromFilename(fileName):
