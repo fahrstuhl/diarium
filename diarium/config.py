@@ -6,10 +6,11 @@ Created on Jan 27, 2013
 import ConfigParser
 
 
-#TODO: Switch to ConfigParser
+#TODO: Configparser
 dateFormat = "%Y-%m-%d"
 timeFormat = "%H:%M:%S"
 fileExtension = ".txt"
-journalPath = "/PATH/TO/YOUR/JOURNAL"
-editor = "/PATH/TO/YOUR/EDITOR"
+#TODO: Create path on first run
+journalPath = "/home/fahrstuhl/journal"
+editor = "/usr/bin/gvim --nofork"
 reader = editor

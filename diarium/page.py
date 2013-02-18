@@ -33,7 +33,11 @@ class Page:
         self.write(self.firstLine())
 
     def openWith(self, command):
-        subprocess.call((config.editor, "-f", self.filename))
+        command = command.split(" ")
+        try:
+            subprocess.call((command[0], command[1], self.filename))
+        except IndexError:
+            subprocess.call((command[0], self.filename))
 
     def createFilename(self):
         filename = os.path.join(config.journalPath, str(self.name) + str(config.fileExtension))
