@@ -35,11 +35,11 @@ A simple journal: A place to dump your brain just one command away.
 ## Setup
 - install [appdirs](http://pypi.python.org/pypi/appdirs) with pip
 - install diarium with pip
-- run one of the three scripts write.py, read.py or search.py in a console once and open the displayed config.ini in a texteditor
+- run diarium once
 - set a command for your favorite texteditor  
   make sure it runs in foreground and doesn't fork and detach. Gvim needs the --nofork flag for example. Consult the manual of your favorite texteditor for more information
 - set a command for your favorite textreader or reuse your editor
-- run write.py -h, read.py -h and search.py -h for an overview of the command line settings
+- run diarium -h
 
 - (optional) set a different path to your journal
 - (optional) set a different date- and timeformat  

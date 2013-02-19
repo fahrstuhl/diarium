@@ -8,9 +8,9 @@ import os.path
 import datetime
 
 
-from diarium import page
-from diarium import config
-from diarium import diarium
+import page
+import config
+import diarium
 
 
 def nameFromFilename(fileName):
@@ -60,29 +60,32 @@ def searchTag(tag, nameList):
 
 
 def search(tag, fromDate=None, tilDate=None):
-    if(fromDate == None and tilDate == None):
+    if(not fromDate and not tilDate):
         nameList = makeNameList()
     else:
-        if(fromDate == None):
+        if(not fromDate):
             fromDate = diarium.makeDateString(datetime.datetime(1900, 1, 1))
-        elif(tilDate == None):
+        elif(not tilDate):
             tilDate = diarium.makeDateString(datetime.datetime(datetime.MAXYEAR, 1, 1))
         nameList = makeNameListFromDate(fromDate, tilDate)
     findings = searchTag(tag,nameList)
     return findings
 
 
-def printFindings(tag, fromDate, tilDate):
-    for page in search(tag, fromDate, tilDate):
+def printFindings(tags, fromDate, tilDate):
+    for page in search(tags, fromDate, tilDate):
         for entry in page:
             print(entry)
+
+def externalPrintFindings(args):
+    printFindings(args.tags, args.fromDate, args.tilDate)
 
 
 if __name__ == "__main__":
     import argparse
     argumentParser = argparse.ArgumentParser(description="Search for journal entries by tags.")
     argumentParser.add_argument("tags", help="Comma separated tags to look for.")
-    argumentParser.add_argument("-f", "--from", help="Search for tags in pages from this date on.")
-    argumentParser.add_argument("-t", "--to", help= "Search for tags in pages until this date.")
+    argumentParser.add_argument("-f", "--fromDate", help="Search for tags in pages from this date on.")
+    argumentParser.add_argument("-t", "--tilDate", help= "Search for tags in pages until this date.")
     args = argumentParser.parse_args()
-    printFindings(args.tags)
+    #printFindings(args.tags, args.fromDate, args.tilDate)

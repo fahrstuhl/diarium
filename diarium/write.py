@@ -5,9 +5,9 @@ Created on Jan 27, 2013
 @author: fahrstuhl
 '''
 
-from diarium import diarium
-from diarium import config
-from diarium import page
+import diarium
+import config
+import page
 
 
 global pageName, globalTags, globalContent, globalQuiet
@@ -58,16 +58,16 @@ def prepareContent(content=None):
 
 
 def write(name=None, tags=None, content=None, quiet=None):
-    if(name == None):
+    if(not name):
         global pageName
         name = pageName
-    if(tags == None):
+    if(not tags):
         global globalTags
         tags = globalTags
-    if(content == None):
+    if(not content):
         global globalContent
         content = globalContent
-    if(quiet == None):
+    if(not quiet):
         global globalQuiet
         quiet = globalQuiet
     f = page.Page(name)
@@ -76,10 +76,12 @@ def write(name=None, tags=None, content=None, quiet=None):
     if(not quiet):
         f.openWith(config.editor)
 
+def externalWrite(args):
+    write(args.date, args.tags, args.content, args.quiet)
 
 if __name__ == "__main__":
     import argparse
-    argumentParser = argparse.ArgumentParser(description="Write new journal entry")
+    argumentParser = argparse.ArgumentParser(description="Write a new journal entry")
     argumentParser.add_argument("-d", "--date",
                             help="Date or name of page to edit")
     argumentParser.add_argument("-t", "--tags", help="Comma separated tags of entry")
@@ -94,4 +96,4 @@ if __name__ == "__main__":
         setContent(args.content)
     if args.quiet:
         setQuiet(args.quiet)
-    write()
+    #write()

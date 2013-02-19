@@ -21,5 +21,5 @@ setup(
       'Development Status :: 3 - Alpha',
       'Topic :: Office/Business :: News/Diary',
       ],
-      scripts=['scripts/read.py', 'scripts/write.py', 'scripts/search.py'],
+      scripts=['scripts/diarium'],
       )
