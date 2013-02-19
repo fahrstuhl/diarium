@@ -55,7 +55,7 @@ As much content as your filesystem allows.
 
 Also new lines and stuff.
 
-time tags, for new, entry  (tags can be multiple words, just separate them by commas)
+time tags, for new, entry  (tags can be multiple words, just separate the tags with commas)
 more content
 ```
 My __2013-02-18.txt__ file for example:
