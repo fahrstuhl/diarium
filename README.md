@@ -14,7 +14,8 @@ A simple journal: A place to dump your brain just one command away.
 - Tags and search  
   Done: Entries can be tagged  
   Done: Search for one or more tags  
-  ToDo: Search only on specific date or page  
+  Done: Search before, after or inbetween dates  
+  ToDo: Search only in specific page
   ToDo: Open search result in viewer
 - Cross platform  
   Done: Linux  

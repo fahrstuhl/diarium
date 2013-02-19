@@ -3,7 +3,7 @@ Created on Jan 26, 2013
 
 @author: fahrstuhl
 '''
-from time import localtime, strftime, strptime
+import datetime
 
 
 import config
@@ -13,23 +13,27 @@ if __name__ == '__main__':
     pass
 
 
-time = strftime(config.timeFormat, localtime())
-date = strftime(config.dateFormat, localtime())
+time = datetime.datetime.strftime(datetime.datetime.today(), config.timeFormat)
+date = datetime.datetime.strftime(datetime.datetime.today(), config.dateFormat)
 
 
 def getDate():
-    date = strftime(config.dateFormat, localtime())
+    date = datetime.datetime.strftime(datetime.datetime.today(), config.dateFormat)
     return date
 
 
 def getTime():
-    time = strftime(config.timeFormat, localtime())
+    time = datetime.datetime.strftime(datetime.datetime.today(), config.timeFormat)
     return time
 
 
-def checkDate(givenDate):
+def makeDate(givenDate):
     try:
-        strptime(givenDate, config.dateFormat)
+        return datetime.datetime.strptime(givenDate, config.dateFormat)
     except ValueError:
-        print("Date format doesn't match")
+        #print("Date format doesn't match")
         raise
+
+def makeDateString(givenDate):
+    return datetime.datetime.strftime(givenDate, config.dateFormat)
+    

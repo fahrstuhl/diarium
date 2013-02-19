@@ -31,14 +31,14 @@ class Test(unittest.TestCase):
         content = self.contentList[1]
         write.write("test-42", tags=tag, content=content, quiet=True)
         self.assertEquals(["# test-42\n", "{} {}  \n".format(write.time, tag) +
-                           write.prepareContent(content)], search.searchTag(tag)[0])
+                           write.prepareContent(content)], search.search(tag)[0])
 
     def testMultiTagSearch(self):
         tags = "{}, {}, {}".format(self.tagList[1], self.tagList[9], self.tagList[2])
         content = self.contentList[2]
         write.write("test-13", tags=tags, content=content, quiet=True)
         self.assertEquals(["# test-13\n", "{} {}  \n".format(write.time, tags) +
-                           write.prepareContent(content)], search.searchTag(tags)[0])
+                           write.prepareContent(content)], search.search(tags)[0])
 
     def testMultiPageSearch(self):
         tag = self.tagList[5]
@@ -49,7 +49,10 @@ class Test(unittest.TestCase):
                       + write.prepareContent(content)],
                      ["# test-99\n", "{} {}  \n".format(write.time, tag)
                        + write.prepareContent(content)]]
-        self.assertEquals(expected, search.searchTag(tag))
+        self.assertEquals(expected, search.search(tag))
+
+    def testDateSearch(self):
+        search.printFindings("", "2013-02-06", "2013-02-06")
 
     def tearDown(self):
         for i in range(self.numberOfFiles):
