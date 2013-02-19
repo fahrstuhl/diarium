@@ -33,8 +33,8 @@ A simple journal: A place to dump your brain just one command away.
   ToDo: Use Python's markdown module to search and export in one go  
 
 ## Setup
-- install [appdirs](http://pypi.python.org/pypi/appdirs) with pip
-- install diarium with pip
+- install [appdirs](http://pypi.python.org/pypi/appdirs) with pip2
+- install diarium with pip2
 - run diarium once
 - set a command for your favorite texteditor  
   make sure it runs in foreground and doesn't fork and detach. Gvim needs the --nofork flag for example. Consult the manual of your favorite texteditor for more information
