@@ -36,4 +36,3 @@ def makeDate(givenDate):
 
 def makeDateString(givenDate):
     return datetime.datetime.strftime(givenDate, config.dateFormat)
-    

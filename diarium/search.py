@@ -1,4 +1,3 @@
-#!/usr/bin/env python2.7
 '''
 Created on Feb 1, 2013
 
@@ -79,13 +78,3 @@ def printFindings(tags, fromDate, tilDate):
 
 def externalPrintFindings(args):
     printFindings(args.tags, args.fromDate, args.tilDate)
-
-
-if __name__ == "__main__":
-    import argparse
-    argumentParser = argparse.ArgumentParser(description="Search for journal entries by tags.")
-    argumentParser.add_argument("tags", help="Comma separated tags to look for.")
-    argumentParser.add_argument("-f", "--fromDate", help="Search for tags in pages from this date on.")
-    argumentParser.add_argument("-t", "--tilDate", help= "Search for tags in pages until this date.")
-    args = argumentParser.parse_args()
-    #printFindings(args.tags, args.fromDate, args.tilDate)

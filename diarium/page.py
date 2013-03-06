@@ -27,7 +27,7 @@ class Page:
             page.write(content)
 
     def firstLine(self):
-        return "# {}\n".format(self.name)
+        return "# {0}\n".format(self.name)
 
     def create(self):
         self.write(self.firstLine())

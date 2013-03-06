@@ -10,9 +10,9 @@ import write
 class Test(unittest.TestCase):
 
     def testPrepareEntry(self):
-        self.assertEquals("\n{} public, private  \n".format(write.time),
+        self.assertEquals("\n{0} public, private  \n".format(write.time),
                           write.prepareEntry("public, private"))
-        self.assertEqual("\n{}   \n".format(write.time), write.prepareEntry(""))
+        self.assertEqual("\n{0}   \n".format(write.time), write.prepareEntry(""))
 
     def testPrepareContent(self):
         self.assertEquals("", write.prepareContent(None))

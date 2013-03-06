@@ -1,4 +1,3 @@
-#! /usr/bin/env python2.7
 '''
 Created on Jan 27, 2013
 
@@ -44,32 +43,22 @@ def setQuiet(value):
 
 
 def prepareEntry(tags=None):
-    if(tags == None):
-        return ""
-    entry = "\n{} {}  \n".format(time, tags)
+    if(not tags):
+        tags = ""
+    entry = "\n{0} {1}  \n".format(time, tags)
     return entry
 
 
 def prepareContent(content=None):
     if(content == None):
         return ""
-    content = "{}\n".format(content)
+    content = "{0}\n".format(content)
     return content
 
 
 def write(name=None, tags=None, content=None, quiet=None):
     if(not name):
-        global pageName
-        name = pageName
-    if(not tags):
-        global globalTags
-        tags = globalTags
-    if(not content):
-        global globalContent
-        content = globalContent
-    if(not quiet):
-        global globalQuiet
-        quiet = globalQuiet
+        name = diarium.getTime()
     f = page.Page(name)
     f.write(prepareEntry(tags))
     f.write(prepareContent(content))

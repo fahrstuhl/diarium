@@ -41,7 +41,7 @@ def firstRun():
     Hi,
     it seems like this is your first run of diarium.
     Before you can start, please open
-    {}
+    {0}
     in a texteditor and set up the commands for your editor and reader and
     maybe customize your journal directory or whatever else you'd like to change.
     """.format(configFile))

@@ -9,6 +9,7 @@ import re
 
 
 import page
+import config
 
 
 class Test(unittest.TestCase):
@@ -17,7 +18,7 @@ class Test(unittest.TestCase):
         self.page = page.Page("Test")
 
     def testFileName(self):
-        self.assertEqual("/home/fahrstuhl/journal/{}.txt".format(self.page.name), self.page.filename)
+        self.assertEqual("/home/fahrstuhl/journal/{0}{1}".format(self.page.name, config.fileExtension), self.page.filename)
 
     def testWriteAndRead(self):
         testinhalt = "Testinhalt zum testen."
