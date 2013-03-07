@@ -5,8 +5,6 @@ Created on Jan 28, 2013
 '''
 import unittest
 import os
-import re
-
 
 import page
 import config
