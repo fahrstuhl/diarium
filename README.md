@@ -19,8 +19,9 @@ A simple journal: A place to dump your brain just one command away.
   ToDo: Open search result in viewer
 - Cross platform  
   Done: Linux  
+  Working: Pandora  
   Untested: Windows, Mac OS X, other desktop os  
-  ToDo: Pandora, Android  
+  ToDo: Android  
 - Encryption  
   ToDo: GPG encryption  
   Working: Container encryption like Truecrypt, encfs or ecryptfs  
@@ -33,8 +34,9 @@ A simple journal: A place to dump your brain just one command away.
   ToDo: Use Python's markdown module to search and export in one go  
 
 ## Setup
-- install [appdirs](http://pypi.python.org/pypi/appdirs) with pip2
-- install diarium with pip2
+- (Python 2.6 only) install [argparse](http://pypi.python.org/pypi/argparse)
+- install [appdirs](http://pypi.python.org/pypi/appdirs)
+- install diarium
 - run diarium once
 - set a command for your favorite texteditor  
   make sure it runs in foreground and doesn't fork and detach. Gvim needs the --nofork flag for example. Consult the manual of your favorite texteditor for more information
@@ -44,7 +46,7 @@ A simple journal: A place to dump your brain just one command away.
 - (optional) set a different path to your journal
 - (optional) set a different date- and timeformat  
   see [Python's strftime function](http://docs.python.org/2/library/time.html#time.strftime)
-- (optional) set a file extension like .txt, .journal or leave it blank
+- (optional) set a file extension like .txt, .md, .journal or leave it blank
 
 ## File format
 ``` markdown
