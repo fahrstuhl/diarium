@@ -68,7 +68,6 @@ if(config.read(configFiles) == []):
 dateFormat = config.get("journal", "dateFormat")
 timeFormat = config.get("journal", "timeFormat")
 fileExtension = config.get("journal", "fileExtension")
-#TODO: Create path on first run
 journalPath = config.get("journal", "journalPath")
 journalPath = os.path.expanduser(journalPath)
 editor = config.get("journal", "editor")
