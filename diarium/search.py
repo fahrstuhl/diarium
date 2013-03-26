@@ -63,7 +63,7 @@ def search(tag, fromDate=None, tilDate=None):
         nameList = makeNameList()
     else:
         if(not fromDate):
-            fromDate = diarium.makeDateString(datetime.datetime(1900, 1, 1))
+            fromDate = diarium.makeDateString(datetime.datetime(datetime.MINYEAR, 1, 1))
         elif(not tilDate):
             tilDate = diarium.makeDateString(datetime.datetime(datetime.MAXYEAR, 1, 1))
         nameList = makeNameListFromDate(fromDate, tilDate)
