@@ -55,12 +55,12 @@ class Test(unittest.TestCase):
         self.assertEquals(expected, search.search(tag))
 
     def testDateSearch(self):
-         self.assertEquals([["# 0001-01-01\n", "{0}   \n".format(write.time)
+        self.assertEquals([["# 0001-01-01\n", "{0}   \n".format(write.time)
                             + write.prepareContent("Start of datesearch")],
                            ["# 0015-01-01\n", "{0}   \n".format(write.time)
                             + write.prepareContent("Middle of datesearch")]],
                            search.search("", "0001-01-01", "0015-01-01"))
-         self.assertEquals([["# 0001-01-01\n", "{0}   \n".format(write.time)
+        self.assertEquals([["# 0001-01-01\n", "{0}   \n".format(write.time)
                             + write.prepareContent("Start of datesearch")],
                            ["# 0015-01-01\n", "{0}   \n".format(write.time)
                             + write.prepareContent("Middle of datesearch")],
