@@ -5,6 +5,7 @@ Created on Jan 28, 2013
 '''
 import unittest
 import os
+import tempfile
 
 import page
 import config
@@ -13,6 +14,8 @@ import config
 class Test(unittest.TestCase):
 
     def setUp(self):
+        self.tempPath = tempfile.mkdtemp(prefix="diariumPageTest-")
+        config.journalPath = self.tempPath
         self.page = page.Page("Test")
         self.taggedEntry = "12:34:56 alpha, beta, gamma  \n Lorem Ipsum\nDolor Sit Amet\n"
         self.untaggedEntry = "13:33:37\nMore Lorem Ipsum\n"
@@ -38,6 +41,7 @@ class Test(unittest.TestCase):
 
     def tearDown(self):
         os.remove(self.page.filename)
+        os.rmdir(self.tempPath)
 
 suite = unittest.TestLoader().loadTestsFromTestCase(Test)
 unittest.TextTestRunner().run(suite)

@@ -13,6 +13,7 @@ import config
 
 entryRegex = re.compile(r"(?P<time>\d\d:\d\d:\d\d)(?P<tags>.*)(\n|$)")
 
+
 class Page:
 
     def __init__(self, name, filename=None):

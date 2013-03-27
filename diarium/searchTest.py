@@ -4,17 +4,21 @@ Created on Feb 6, 2013
 @author: fahrstuhl
 '''
 import unittest
-import page
-import search
-import write
 import random
 import string
 import os
+import tempfile
 
+import page
+import search
+import write
+import config
 
 class Test(unittest.TestCase):
 
     def setUp(self):
+        self.tempPath = tempfile.mkdtemp(prefix="diariumSearchTest-")
+        config.journalPath = self.tempPath
         self.numberOfFiles = 100
         self.tagList = list()
         self.contentList = list()
@@ -75,6 +79,7 @@ class Test(unittest.TestCase):
         os.remove(page.Page("0001-01-01").filename)
         os.remove(page.Page("0015-01-01").filename)
         os.remove(page.Page("0031-01-01").filename)
+        os.rmdir(self.tempPath)
 
 suite = unittest.TestLoader().loadTestsFromTestCase(Test)
 unittest.TextTestRunner().run(suite)

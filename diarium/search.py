@@ -26,6 +26,7 @@ def makeNameList():
         if(pageName == None):
             continue
         nameList.append(pageName)
+    nameList.sort()
     return nameList
 
 
@@ -43,6 +44,7 @@ def makeNameListFromDate(fromDate, tilDate):
             continue
         if(pageDate >= fromDate and pageDate <= tilDate):
             nameList.append(pageName)
+    nameList.sort()
     return nameList
 
 
@@ -67,7 +69,7 @@ def search(tag, fromDate=None, tilDate=None):
         elif(not tilDate):
             tilDate = diarium.makeDateString(datetime.datetime(datetime.MAXYEAR, 1, 1))
         nameList = makeNameListFromDate(fromDate, tilDate)
-    findings = searchTag(tag,nameList)
+    findings = searchTag(tag, nameList)
     return findings
 
 
