@@ -8,6 +8,7 @@ from diarium import write
 from diarium import read
 from diarium import search
 from diarium import config
+from diarium import sync
 
 if __name__ == "__main__":
     import argparse
@@ -32,6 +33,21 @@ if __name__ == "__main__":
     parser_search.add_argument("-f", "--fromDate", help="Search for tags in pages from this date on.")
     parser_search.add_argument("-t", "--tilDate", help= "Search for tags in pages until this date.")
     parser_search.set_defaults(func=search.externalPrintFindings)
+
+    parser_sync = subparsers.add_parser('sync', help='Synchronize two journals')
+    sync_subparser = parser_sync.add_subparsers(title='sync-commands')
+    sync_pull = sync_subparser.add_parser('pull', help='Pull pages from a remote directory to a local directory')
+    sync_pull.add_argument("remote", help="Remote directory")
+    sync_pull.add_argument("-l", "--local", help="Local directory", default=config.journalPath)
+    sync_pull.set_defaults(func=sync.extPull)
+    sync_push = sync_subparser.add_parser('push', help='Push pages from a local directory to a remote directory')
+    sync_push.add_argument("remote", help="Remote directory")
+    sync_push.add_argument("-l", "--local", help="Local directory", default=config.journalPath)
+    sync_push.set_defaults(func=sync.extPush)
+    sync_merge = sync_subparser.add_parser('merge', help='Synchronize a local and a remote directory')
+    sync_merge.add_argument("remote", help="Remote directory")
+    sync_merge.add_argument("-l", "--local", help="Local directory", default=config.journalPath)
+    sync_merge.set_defaults(func=sync.extMerge)
 
     args = argumentParser.parse_args()
     args.func(args)

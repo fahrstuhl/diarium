@@ -5,12 +5,12 @@ Created on Mar 25, 2013
 '''
 
 
-import difflib
 import filecmp
 import shutil
 import os.path
 import tempfile
 
+import search
 import page
 import config
 
@@ -21,18 +21,26 @@ class Sync:
         self.remoteDir = remoteDir
         self.localDir = localDir
 
-    def copyMissingFiles(self, dirDiff):
-        for each in dirDiff.left_only:
-            shutil.copy(os.path.join(dirDiff.left, each), dirDiff.right)
+    def copyMissingFiles(self, twoWay):
+        for each in search.makeNameList(self.dirDiff.left_only):
+            shutil.copy(os.path.join(self.dirDiff.left, each + config.fileExtension), self.dirDiff.right)
+        if twoWay:
+            for each in search.makeNameList(self.dirDiff.right_only):
+                shutil.copy(os.path.join(self.dirDiff.right, each + config.fileExtension), self.dirDiff.left)
 
-    def syncDifferentFiles(self, dirDiff):
-        for each in dirDiff.diff_files:
-            self.syncPage(each)
+    def syncDifferentFiles(self, twoWay):
+        for name in search.makeNameList(self.dirDiff.diff_files):
+            self.syncPage(name, twoWay)
 
-    def syncPage(self, name):
+    def syncPage(self, name, twoWay):
         fromPage = self.makePage(self.dirDiff.left, name)
         toPage = self.makePage(self.dirDiff.right, name)
-        self.mergeEntries(fromPage, toPage)
+        entryList = self.mergeEntries(fromPage, toPage)
+        replacement = self.createReplacementPage(name, entryList)
+        shutil.copy(replacement.filename, toPage.filename)
+        if twoWay:
+            shutil.copy(replacement.filename, fromPage.filename)
+        os.remove(replacement.filename)
 
     def mergeEntries(self, fromPage, toPage):
         entrySet = set()
@@ -40,16 +48,11 @@ class Sync:
         self.cleanNewlinesAndAdd(entrySet, toPage)
         entryList = list(entrySet)
         entryList.sort()
-        self.replacePage(toPage, entryList)
+        return entryList
 
     def cleanNewlinesAndAdd(self, entrySet, cleanPage):
         for entry in cleanPage.getEntries():
             entrySet.add(entry.rstrip("\n"))
-
-    def replacePage(self, updatePage, entryList):
-        replacement = self.createReplacementPage(updatePage.name, entryList)
-        shutil.copy(replacement.filename, updatePage.filename)
-        os.remove(replacement.filename)
 
     def createReplacementPage(self, name, contentList):
         replacementFile = tempfile.mkstemp()
@@ -60,14 +63,17 @@ class Sync:
         return replacementPage
 
     def makePage(self, path, name):
-        filename = os.path.join(path, name)
-        name = os.path.splitext(name)[0]
+        filename = os.path.join(path, name + config.fileExtension)
         newPage = page.Page(name=name, filename=filename)
         return newPage
 
     def oneWaySync(self):
-        self.copyMissingFiles(self.dirDiff)
-        self.syncDifferentFiles(self.dirDiff)
+        self.copyMissingFiles(twoWay=False)
+        self.syncDifferentFiles(twoWay=False)
+
+    def twoWaySync(self):
+        self.copyMissingFiles(twoWay=True)
+        self.syncDifferentFiles(twoWay=True)
 
     def pull(self):
         self.dirDiff = filecmp.dircmp(self.remoteDir, self.localDir)
@@ -78,5 +84,32 @@ class Sync:
         self.oneWaySync()
 
     def merge(self):
-        self.pull()
-        self.push()
+        self.dirDiff = filecmp.dircmp(self.remoteDir, self.localDir)
+        self.twoWaySync()
+
+
+def merge(localDir, remoteDir):
+    merge = Sync(localDir, remoteDir)
+    merge.merge()
+
+
+def extMerge(args):
+    merge(args.remote, args.local)
+
+
+def pull(fromDir, toDir):
+    pull = Sync(fromDir, toDir)
+    pull.pull()
+
+
+def extPull(args):
+    pull(args.remote, args.local)
+
+
+def push(fromDir, toDir):
+    push = Sync(fromDir, toDir)
+    push.push()
+
+
+def extPush(args):
+    push(args.remote, args.local)

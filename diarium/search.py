@@ -19,9 +19,9 @@ def nameFromFilename(fileName):
     return None
 
 
-def makeNameList():
+def makeNameList(fromList):
     nameList = list()
-    for textFile in os.listdir(config.journalPath):
+    for textFile in fromList:
         pageName = nameFromFilename(textFile)
         if(pageName == None):
             continue
@@ -30,11 +30,11 @@ def makeNameList():
     return nameList
 
 
-def makeNameListFromDate(fromDate, tilDate):
+def makeNameListFromDate(fromDate, tilDate, fromList):
     nameList = list()
     fromDate = diarium.makeDate(fromDate)
     tilDate = diarium.makeDate(tilDate)
-    for textFile in os.listdir(config.journalPath):
+    for textFile in fromList:
         pageName = nameFromFilename(textFile)
         if(pageName == None):
             continue
@@ -61,14 +61,15 @@ def searchTag(tag, nameList):
 
 
 def search(tag, fromDate=None, tilDate=None):
+    dirList = os.listdir(config.journalPath)
     if(not fromDate and not tilDate):
-        nameList = makeNameList()
+        nameList = makeNameList(dirList)
     else:
         if(not fromDate):
             fromDate = diarium.makeDateString(datetime.datetime(datetime.MINYEAR, 1, 1))
         elif(not tilDate):
             tilDate = diarium.makeDateString(datetime.datetime(datetime.MAXYEAR, 1, 1))
-        nameList = makeNameListFromDate(fromDate, tilDate)
+        nameList = makeNameListFromDate(fromDate, tilDate, dirList)
     findings = searchTag(tag, nameList)
     return findings
 

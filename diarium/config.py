@@ -27,6 +27,7 @@ class ConfigFileNotFoundAt(Exception):
             str += i + "\n"
         return repr(self.str)
 
+
 def firstRun():
     config.add_section("journal")
     config.set("journal", "dateFormat", "%Y-%m-%d")
@@ -36,7 +37,7 @@ def firstRun():
     config.set("journal", "reader", "/usr/bin/gvim --nofork")
     config.set("journal", "editor", "/usr/bin/gvim --nofork")
     with open(configFile, "w") as filePointer:
-        config.write(filePointer) 
+        config.write(filePointer)
     print("""
     Hi,
     it seems like this is your first run of diarium.

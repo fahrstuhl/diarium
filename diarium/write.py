@@ -36,6 +36,6 @@ def write(name=None, tags=None, content=None, quiet=None):
     if(not quiet):
         f.openWith(config.editor)
 
+
 def externalWrite(args):
     write(args.date, args.tags, args.content, args.quiet)
-

@@ -7,6 +7,7 @@ import unittest
 import tempfile
 import os
 import filecmp
+import datetime
 
 import write
 import config
@@ -23,10 +24,13 @@ class Test(unittest.TestCase):
         self.localContent = ["tag1, tag2, tag3", "LoremIpsum\nDolorSit amet\nLOCAL\nLOCAl"]
         self.sharedContent = ["tag2, tag4", "Share the Lorem Ipsum\nShare IT!"]
         self.remoteContent = ["tag4, tag5", "Remote\nStuff"]
+        write.time = datetime.datetime.strftime(datetime.datetime.strptime("00:00:00", "%H:%M:%S"), config.timeFormat)
         write.write(name="1900-01-01", tags=self.localContent[0], content=self.localContent[1], quiet=True)
+        write.time = datetime.datetime.strftime(datetime.datetime.strptime("10:00:00", "%H:%M:%S"), config.timeFormat)
         write.write(name="1841-01-01", tags=self.sharedContent[0], content=self.sharedContent[1], quiet=True)
         config.journalPath = self.remoteDir
         write.write(name="1841-01-01", tags=self.sharedContent[0], content=self.sharedContent[1], quiet=True)
+        write.time = datetime.datetime.strftime(datetime.datetime.strptime("11:00:00", "%H:%M:%S"), config.timeFormat)
         write.write(name="1841-01-01", tags=self.remoteContent[0], content=self.remoteContent[1], quiet=True)
         write.write(name="1800-01-01", tags=self.remoteContent[0], content=self.remoteContent[1], quiet=True)
         write.write(name="1900-01-01", tags=self.remoteContent[0], content=self.remoteContent[1], quiet=True)
