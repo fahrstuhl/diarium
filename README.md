@@ -26,8 +26,10 @@ A simple journal: A place to dump your brain just one command away.
   ToDo: GPG encryption  
   Working: Container encryption like Truecrypt, encfs or ecryptfs  
 - Synchronisation  
-  ToDo: Internal merge tool  
-  Working: SCM like git
+  Done: Internal (local) merge tool  
+  ToDo: Merge over ssh/rsync/ftp  
+  Working: SCM like git  
+  Working: Remote merge over sshfs/ftpfs
 - Information separation for publishing  
   Done: Information can be separated by tag search  
   Working: Search returns parsable markdown  
@@ -46,7 +48,7 @@ A simple journal: A place to dump your brain just one command away.
 - (optional) set a different path to your journal
 - (optional) set a different date- and timeformat  
   see [Python's strftime function](http://docs.python.org/2/library/time.html#time.strftime)
-- (optional) set a file extension like .txt, .md, .journal or leave it blank
+- (optional) set a file extension like .txt, .md, .journal or .whatever. Don't leave it blank.
 
 ## File format
 ``` markdown
