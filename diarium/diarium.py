@@ -27,6 +27,18 @@ def getTime():
     return time
 
 
+def convertDateString(date, originalFormat, convertedFormat = config.dateFormat):
+    date = datetime.datetime.strptime(date, originalFormat)
+    dateString = datetime.datetime.strftime(date, convertedFormat)
+    return dateString
+
+
+def convertTimeString(date, originalFormat, convertedFormat = config.timeFormat):
+    time = datetime.datetime.strptime(time, originalFormat)
+    timeString = datetime.datetime.strftime(time, convertedFormat)
+    return timeString
+
+
 def makeDate(givenDate):
     try:
         return datetime.datetime.strptime(givenDate, config.dateFormat)

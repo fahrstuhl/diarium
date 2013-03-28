@@ -33,6 +33,9 @@ A simple journal: A place to dump your brain just one command away.
 - Information separation for publishing  
   Done: Information can be separated by tag search  
   Working: Search returns parsable markdown  
+  Working: Export single entry based on tag search  
+  ToDo: Export multiple entries based on tag search  
+  ToDo: Parse exported entries
   ToDo: Use Python's markdown module to search and export in one go  
 
 ## Setup
@@ -46,7 +49,7 @@ A simple journal: A place to dump your brain just one command away.
 - run diarium -h
 
 - (optional) set a different path to your journal
-- (optional) set a different date- and timeformat  
+- (optional) set a different date- and timeformat
   see [Python's strftime function](http://docs.python.org/2/library/time.html#time.strftime)
 - (optional) set a file extension like .txt, .md, .journal or .whatever. Don't leave it blank.
 

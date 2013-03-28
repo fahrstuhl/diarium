@@ -9,6 +9,7 @@ from diarium import read
 from diarium import search
 from diarium import config
 from diarium import sync
+from diarium import export
 
 if __name__ == "__main__":
     import argparse
@@ -48,6 +49,13 @@ if __name__ == "__main__":
     sync_merge.add_argument("remote", help="Remote directory")
     sync_merge.add_argument("-l", "--local", help="Local directory", default=config.journalPath)
     sync_merge.set_defaults(func=sync.extMerge)
+
+    parser_export = subparsers.add_parser("export", help="Export single entries from a tag-search")
+    parser_export.add_argument("tags", help="Comma separated tags to look for.")
+    parser_export.add_argument("-f", "--fromDate", help="Search for tags in pages from this date on.")
+    parser_export.add_argument("-t", "--tilDate", help= "Search for tags in pages until this date.")
+    parser_export.add_argument("-o", "--outFile", help="File to write the selected entry to", default=None)
+    parser_export.set_defaults(func=export.extExport)
 
     args = argumentParser.parse_args()
     args.func(args)
