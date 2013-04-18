@@ -9,6 +9,7 @@ import filecmp
 import shutil
 import os.path
 import tempfile
+import sys
 
 import search
 import page
@@ -49,16 +50,34 @@ class Sync:
         entryList.sort()
         return entryList
 
+    def dictKeyDifference(self, fromDict, toDict):
+        if(sys.version[0:3] == '2.6'):
+            return set(fromDict.keys()) - set(toDict.keys())
+        else:
+            return fromDict.viewkeys() - toDict.viewkeys()
+
+    def dictItemIntersection(self, fromDict, toDict):
+        if(sys.version[0:3] == '2.6'):
+            return set(fromDict.items()) & set(toDict.items())
+        else:
+            return fromDict.viewitems() & toDict.viewitems()
+
+    def dictItemDifference(self, fromDict, toDict):
+        if(sys.version[0:3] == '2.6'):
+            return set(fromDict.items()) - set(toDict.items())
+        else:
+            return fromDict.viewitems() - toDict.viewitems()
+
     def mergeDicts(self, fromDict, toDict):
         entryList = list()
-        for key in fromDict.viewkeys() - toDict.viewkeys():
+        for key in self.dictKeyDifference(fromDict, toDict):
             entryList.append(fromDict.pop(key))
-        for key in toDict.viewkeys() - fromDict.viewkeys():
+        for key in self.dictKeyDifference(toDict, fromDict):
             entryList.append(toDict.pop(key))
-        for key, value in fromDict.viewitems() & toDict.viewitems():
+        for key, value in self.dictItemIntersection(fromDict, toDict):
             entryList.append(fromDict.pop(key))
             del toDict[key]
-        for key, value in fromDict.viewitems() - toDict.viewitems():
+        for key, value in self.dictItemDifference(fromDict, toDict):
             entryList.append(self.resolveConflict(fromDict, toDict, key))
         return entryList
 
