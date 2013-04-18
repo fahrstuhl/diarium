@@ -81,19 +81,22 @@ class Page:
             entry += part
         return entry
 
-    def getEntries(self):
-        entries = list()
+    def getEntries(self, rstrip=False):
+        entries = dict()
         content = self.getLines()
         for i, line in enumerate(content):
             if entryRegex.match(line):
                 entry = self.extractEntryFromLines(content[i:])
-                entries.append(entry)
+                if not rstrip:
+                    entries[entryRegex.match(line).group("time")]=entry
+                else:
+                    entries[entryRegex.match(line).group("time")]=entry.rstrip("\n")
         return entries
 
     def getMatchingEntries(self, tags, exact):
         entries = self.getEntries()
         result = list()
-        for entry in entries:
+        for entry in entries.itervalues():
             if((exact and self.matchesAllTags(entry, tags)) or
                not exact and self.matchesAnyTags(entry, tags)):
                 result.append(entry)

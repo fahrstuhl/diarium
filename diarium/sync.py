@@ -43,16 +43,37 @@ class Sync:
         os.remove(replacement.filename)
 
     def mergeEntries(self, fromPage, toPage):
-        entrySet = set()
-        self.cleanNewlinesAndAdd(entrySet, fromPage)
-        self.cleanNewlinesAndAdd(entrySet, toPage)
-        entryList = list(entrySet)
+        fromDict = fromPage.getEntries(rstrip=True)
+        toDict = toPage.getEntries(rstrip=True)
+        entryList = self.mergeDicts(fromDict, toDict)
         entryList.sort()
         return entryList
 
-    def cleanNewlinesAndAdd(self, entrySet, cleanPage):
-        for entry in cleanPage.getEntries():
-            entrySet.add(entry.rstrip("\n"))
+    def mergeDicts(self, fromDict, toDict):
+        entryList = list()
+        for key in fromDict.viewkeys() - toDict.viewkeys():
+            entryList.append(fromDict.pop(key))
+        for key in toDict.viewkeys() - fromDict.viewkeys():
+            entryList.append(toDict.pop(key))
+        for key, value in fromDict.viewitems() & toDict.viewitems():
+            entryList.append(fromDict.pop(key))
+            del toDict[key]
+        for key, value in fromDict.viewitems() - toDict.viewitems():
+            entryList.append(self.resolveConflict(fromDict, toDict, key))
+        return entryList
+
+    def resolveConflict(self, fromDict, toDict, key):
+        conflictingEntries = {"1": fromDict[key], "2": toDict[key]}
+        conflictString = """The following two entries conflict:\n
+[1]{0}:\n
+{1}\n\n
+[2]{2}\n
+{3}\n
+Please chose which version should be used: 
+        """.format(self.dirDiff.left, conflictingEntries["1"], self.dirDiff.right, conflictingEntries["2"])
+        choice = raw_input(conflictString)
+        chosenEntry = conflictingEntries.pop(choice)
+        return chosenEntry
 
     def createReplacementPage(self, name, contentList):
         replacementFile = tempfile.mkstemp()

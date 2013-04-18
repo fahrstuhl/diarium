@@ -53,6 +53,10 @@ A simple journal: A place to dump your brain just one command away.
   see [Python's strftime function](http://docs.python.org/2/library/time.html#time.strftime)
 - (optional) set a file extension like .txt, .md, .journal or .whatever. Don't leave it blank.
 
+## Synchronization
+Currently you can't synchronize over remote protocols __except__ when you mount your remote directories via sshfs or similar.  
+Because entries are identified by their time, changing an existing entry can create a conflict between two journals. While synchronizing you will be asked which version should be kept. The other version will __NOT__ be backed up.
+
 ## File format
 ``` markdown
 # filename without extension

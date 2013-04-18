@@ -28,7 +28,7 @@ class Test(unittest.TestCase):
         self.assertEqual("{0}/{1}{2}".format(config.journalPath, self.page.name, config.fileExtension), self.page.filename)
 
     def testWriteAndRead(self):
-        self.assertEqual(self.page.getEntries(), [self.taggedEntry, self.untaggedEntry, self.singleTaggedEntry])
+        self.assertEqual(self.page.getEntries().values(), [self.taggedEntry, self.untaggedEntry, self.singleTaggedEntry])
         self.assertEqual(self.page.getText(), "# Test\n" + self.taggedEntry
                          + self.untaggedEntry
                          + self.singleTaggedEntry)

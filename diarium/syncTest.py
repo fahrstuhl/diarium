@@ -68,5 +68,16 @@ class Test(unittest.TestCase):
         self.assertEqual(filecmp.dircmp(self.remoteDir, self.localDir).right_only, [])
         self.assertEqual(filecmp.dircmp(self.remoteDir, self.localDir).diff_files, [])
 
+    def testConflictedMerge(self):
+        config.journalPath = self.localDir
+        write.time = datetime.datetime.strftime(datetime.datetime.strptime("11:00:00", "%H:%M:%S"), config.timeFormat)
+        write.write(name="1800-01-01", tags=self.remoteContent[0], content=self.localContent[1], quiet=True)
+        merge = sync.Sync(self.remoteDir, self.localDir)
+        sync.raw_input = lambda _: "2" 
+        merge.merge()
+        self.assertEqual(filecmp.dircmp(self.remoteDir, self.localDir).left_only, [])
+        self.assertEqual(filecmp.dircmp(self.remoteDir, self.localDir).right_only, [])
+        self.assertEqual(filecmp.dircmp(self.remoteDir, self.localDir).diff_files, [])
+
 suite = unittest.TestLoader().loadTestsFromTestCase(Test)
 unittest.TextTestRunner().run(suite)
